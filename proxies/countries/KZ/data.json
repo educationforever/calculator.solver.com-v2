@@ -1,0 +1,80 @@
+[
+  {
+    "proxy": "http://31.43.179.235:80",
+    "protocol": "http",
+    "ip": "31.43.179.235",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  },
+  {
+    "proxy": "http://31.43.179.94:80",
+    "protocol": "http",
+    "ip": "31.43.179.94",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  },
+  {
+    "proxy": "http://31.43.179.163:80",
+    "protocol": "http",
+    "ip": "31.43.179.163",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  },
+  {
+    "proxy": "http://31.43.179.164:80",
+    "protocol": "http",
+    "ip": "31.43.179.164",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  },
+  {
+    "proxy": "http://31.43.179.182:80",
+    "protocol": "http",
+    "ip": "31.43.179.182",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  },
+  {
+    "proxy": "http://31.43.179.232:80",
+    "protocol": "http",
+    "ip": "31.43.179.232",
+    "port": 80,
+    "https": false,
+    "anonymity": "elite",
+    "score": 1,
+    "geolocation": {
+      "country": "KZ",
+      "city": ""
+    }
+  }
+]
