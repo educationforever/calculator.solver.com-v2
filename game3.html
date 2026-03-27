@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Getting ready for solving...</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+}
+
+.game-frame {
+    position: fixed;
+    inset: 0;
+}
+
+.game-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+</style>
+</head>
+<body>
+
+<div class="game-frame" id="gameContainer">
+    <iframe
+        src="https://db.ducklit.com/html/fnaf/index.html"
+        allowfullscreen
+        allow="fullscreen; autoplay; gamepad"
+        sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms allow-popups"
+        id="gameIframe"
+    ></iframe>
+</div>
+
+<script>
+const iframe = document.getElementById('gameIframe');
+const container = document.getElementById('gameContainer');
+
+// Force the iframe to receive touch events
+function focusIframe() {
+    iframe.focus({ preventScroll: true });
+}
+
+// On mobile, we need to capture the first touch and forward it to the iframe
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+    container.addEventListener('touchstart', (e) => {
+        focusIframe();
+        // Forward the touch to the iframe (triggers the in-game "touch to continue")
+        const touch = e.touches[0];
+        const simulatedEvent = new TouchEvent('touchstart', {
+            touches: [touch],
+            targetTouches: [touch],
+            changedTouches: [touch],
+            bubbles: true,
+            cancelable: true
+        });
+        iframe.contentWindow.document.dispatchEvent(simulatedEvent);
+    }, { passive: false });
+}
+
+// Also focus on any tap or click
+container.addEventListener('click', focusIframe);
+window.addEventListener('load', focusIframe);
+</script>
+
+</body>
+</html>

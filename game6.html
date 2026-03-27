@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Sled Rider 3D</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: #111;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.page-title {
+  color: white;
+  font-size: 50px;
+  margin: 20px 0 10px 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+#fullscreenBtn {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  touch-action: manipulation;
+}
+
+#fullscreenBtn:hover {
+  background: #27ae60;
+}
+
+#gameContainer {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .page-title { font-size: 32px; margin: 10px 0 5px 0; }
+  #fullscreenBtn { display: none; }
+}
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Sled Rider</h1>
+<button id="fullscreenBtn">Fullscreen</button>
+
+<div id="gameContainer">
+  <iframe
+    src="https://db.ducklit.com/html/snow_rider_3d/index.html"
+    allowfullscreen
+    tabindex="0"
+    allow="autoplay; fullscreen; gamepad; keyboard-map *">
+  </iframe>
+</div>
+
+<script>
+const container = document.getElementById("gameContainer");
+const button = document.getElementById("fullscreenBtn");
+const iframe = container.querySelector("iframe");
+
+// Cross-browser fullscreen request
+function requestFullscreen(element) {
+  if (element.requestFullscreen) element.requestFullscreen();
+  else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
+  else if (element.msRequestFullscreen) element.msRequestFullscreen();
+}
+
+// Cross-browser exit fullscreen
+function exitFullscreen() {
+  if (document.exitFullscreen) document.exitFullscreen();
+  else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  else if (document.msExitFullscreen) document.msExitFullscreen();
+}
+
+// Desktop fullscreen toggle
+button.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    requestFullscreen(container);
+    button.textContent = "Exit Fullscreen";
+    setTimeout(() => iframe.focus(), 300);
+  } else {
+    exitFullscreen();
+    button.textContent = "Fullscreen";
+  }
+});
+
+// Always focus iframe on click/tap
+container.addEventListener("click", () => iframe.focus());
+window.addEventListener("load", () => iframe.focus());
+
+// Mobile auto fullscreen on first tap
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+  const onFirstTap = () => {
+    requestFullscreen(container);
+    iframe.focus();
+    button.style.display = "none";
+    window.removeEventListener("touchstart", onFirstTap);
+  };
+  window.addEventListener("touchstart", onFirstTap, { once: true });
+}
+
+// Resize iframe dynamically for mobile landscape/portrait
+function resizeIframe() {
+  iframe.style.height = `${window.innerHeight}px`;
+  iframe.style.width = `${window.innerWidth}px`;
+}
+window.addEventListener("resize", resizeIframe);
+resizeIframe();
+</script>
+
+</body>
+</html>
