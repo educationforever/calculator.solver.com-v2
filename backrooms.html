@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Calculations</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+#fullscreenBtn {
+  padding: 14px;
+  font-size: 18px;
+  background: #222;
+  color: white;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+#fullscreenBtn:active {
+  background: #333;
+}
+
+.game-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.game-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<button id="fullscreenBtn">Tap for Fullscreen</button>
+
+<div class="game-container" id="gameContainer">
+  <iframe
+    src="https://db.ducklit.com/html/backroomsv1.5/index.html"
+    allow="fullscreen; autoplay; gamepad; pointer-lock"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+const container = document.getElementById("gameContainer");
+const button = document.getElementById("fullscreenBtn");
+
+button.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    container.requestFullscreen().catch(err => {
+      console.log("Fullscreen failed:", err);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    button.textContent = "Exit Fullscreen";
+  } else {
+    button.textContent = "Tap for Fullscreen";
+  }
+});
+</script>
+
+</body>
+</html>
