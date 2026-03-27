@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculations</title>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.game-container {
+  width: 100%;
+  height: 100%;
+}
+
+.game-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<div class="game-container" id="gameContainer">
+  <iframe
+    src="https://geometry-vibes.games.playgama.net/cmfifzyho00z8ow0hmenyesgu/index.html"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<script>
+const container = document.getElementById("gameContainer");
+
+// Try to enter fullscreen automatically
+function goFullscreen() {
+  if (container.requestFullscreen) {
+    container.requestFullscreen();
+  } else if (container.webkitRequestFullscreen) { // Safari
+    container.webkitRequestFullscreen();
+  } else if (container.msRequestFullscreen) { // IE11
+    container.msRequestFullscreen();
+  }
+}
+
+// On desktop, this works immediately
+goFullscreen();
+
+// On mobile, some browsers block auto-fullscreen until a touch event
+document.body.addEventListener("touchstart", goFullscreen, { once: true });
+</script>
+
+</body>
+</html>
