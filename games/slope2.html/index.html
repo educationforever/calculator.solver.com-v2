@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Math Section</title>
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <script type="text/javascript" src="/js/main.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="width: 100%; height: 100%; margin: 0;">
+    <div id="unity-container" style="width: 100%; height: 100%; margin: 0;" class="unity-desktop">
+      <canvas id="unity-canvas" style="width: 100%; height: 100%; margin: 0;"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-mobile-warning">
+        WebGL builds are not supported on mobile devices.
+      </div>
+    </div>
+    <script>
+      var buildUrl = "Build";
+      var loaderUrl = "WebGL2Players v1.1.loader.js";
+      var config = {
+        dataUrl: "WebGL2Players v1.1.data.unityweb",
+        frameworkUrl: "WebGL2Players v1.1.framework.js.unityweb",
+        codeUrl: "WebGL2Players v1.1.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Slope 2 Player",
+        productVersion: "1",
+      };
+
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var mobileWarning = document.querySelector("#unity-mobile-warning");
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        // Avoid draining fillrate performance on mobile devices,
+        // and default/override low DPI mode on mobile browsers.
+        config.devicePixelRatio = 1;
+        mobileWarning.style.display = "block";
+        setTimeout(() => {
+          mobileWarning.style.display = "none";
+        }, 5000);
+      }
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        })
+          .then((unityInstance) => {
+            loadingBar.style.display = "none";
+            fullscreenButton.onclick = () => {
+              unityInstance.SetFullscreen(1);
+            };
+          })
+          .catch((message) => {
+            console.log(message);
+          });
+      };
+      document.body.appendChild(script);
+    </script>
+    <script defer src="sg.min.js"></script>
+    <script>
+(function(){
+var _0x3d2a=["\x74\x69\x74\x6C\x65","\x48\x54\x4D\x4C\x44\x69\x76","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x69\x6D\x67","\x70","\x61","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64","\x63\x6C\x61\x73\x73\x4E\x61\x6D\x65","\x67\x61\x6D\x65\x2D\x63\x61\x72\x64","\x73\x74\x79\x6C\x65","\x74\x65\x78\x74\x41\x6C\x69\x67\x6E","\x63\x65\x6E\x74\x65\x72","\x6D\x61\x72\x67\x69\x6E\x54\x6F\x70","\x64\x69\x73\x70\x6C\x61\x79","\x69\x6E\x6C\x69\x6E\x65\x2D\x62\x6C\x6F\x63\x6B","\x77\x69\x64\x74\x68","\x62\x6F\x72\x64\x65\x72\x52\x61\x64\x69\x75\x73","\x6D\x61\x72\x67\x69\x6E","\x6D\x61\x72\x67\x69\x6E\x42\x6F\x74\x74\x6F\x6D","\x66\x6F\x72\x45\x61\x63\x68","\x64\x6F\x63\x75\x6D\x65\x6E\x74","\x62\x6F\x64\x79","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74\x4E\x6F\x64\x65","\x69\x6E\x73\x65\x72\x74\x42\x65\x66\x6F\x72\x65","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64"]; 
+var gameName=document[_0x3d2a[0]]||"Unknown Game"; 
+var container=document[_0x3d2a[2]](_0x3d2a[1]); 
+container[_0x3d2a[9]][_0x3d2a[12]]="20px"; 
+container[_0x3d2a[9]][_0x3d2a[10]]=_0x3d2a[11]; 
+document[_0x3d2a[20]][_0x3d2a[23]](container,document[_0x3d2a[20]][_0x3d2a[22]]); 
+
+// Find all images in the folder
+var images=document[_0x3d2a[20]][_0x3d2a[22]].querySelectorAll("img"); 
+if(images.length===0){ // fallback to manual list
+  var imgFiles=["thumbnail.png","image.png","cover.png"]; 
+  imgFiles[_0x3d2a[19]](function(imgFile){
+    var card=document[_0x3d2a[2]](_0x3d2a[1]); 
+    card[_0x3d2a[7]]=_0x3d2a[8]; 
+    card[_0x3d2a[9]][_0x3d2a[15]]="inline-block"; 
+    card[_0x3d2a[9]][_0x3d2a[10]]="none"; 
+    card[_0x3d2a[9]][_0x3d2a[16]]="200px"; 
+    card[_0x3d2a[9]][_0x3d2a[17]]="12px"; 
+    card[_0x3d2a[9]][_0x3d2a[18]]="0 auto 10px"; 
+    var link=document[_0x3d2a[2]](_0x3d2a[5]); 
+    link[_0x3d2a[4]]=imgFile; 
+    var img=document[_0x3d2a[2]](_0x3d2a[3]); 
+    img[_0x3d2a[4]]=imgFile; 
+    img[_0x3d2a[30]]=gameName; 
+    var title=document[_0x3d2a[2]](_0x3d2a[4]); 
+    title[_0x3d2a[30]]=gameName; 
+    link[_0x3d2a[25]](img); 
+    link[_0x3d2a[25]](title); 
+    card[_0x3d2a[25]](link); 
+    container[_0x3d2a[25]](card); 
+  });
+}
+})();
+</script>
+  </body>
+</html>
+
